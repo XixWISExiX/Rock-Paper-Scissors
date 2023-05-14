@@ -1,7 +1,14 @@
+// VERSION 1.0
+
 // Runs 5 Rounds of Rock Paper Scissors
+
+// TODO 1) remove logic that plays 5 rounds.
+// TODO 2) add event listener to buttons to rockPaperScissorsRound & playerSelection with console.logs.
+// TODO 3) add a div for displaying results and change all console.logs from 2) to DOM methods.
+// TODO 4) Display the running score and announce the winner once one player reaches 5 points.
+
 function game() {
   for (let i = 0; i < 5; i++) {
-    // if(!isValid(playerSelection))
     let playerSelection = prompt("Enter 'rock', 'paper', or 'scissors': ");
     while (!isValid(playerSelection)) {
       playerSelection = prompt(
