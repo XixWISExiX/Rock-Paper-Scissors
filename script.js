@@ -2,29 +2,21 @@
 
 // Runs 5 Rounds of Rock Paper Scissors
 
-// TODO 1) remove logic that plays 5 rounds.
-// TODO 2) add event listener to buttons to rockPaperScissorsRound & playerSelection with console.logs.
+// TODO 1) remove logic that plays 5 rounds. ✅
+// TODO 2) add event listener to buttons to rockPaperScissorsRound & playerSelection with console.logs. ✅
 // TODO 3) add a div for displaying results and change all console.logs from 2) to DOM methods.
 // TODO 4) Display the running score and announce the winner once one player reaches 5 points.
 
 function game() {
-  for (let i = 0; i < 5; i++) {
-    let playerSelection = prompt("Enter 'rock', 'paper', or 'scissors': ");
-    while (!isValid(playerSelection)) {
-      playerSelection = prompt(
-        "Please enter either 'rock, 'paper', or 'scissors': "
-      );
-    }
-    let computerSelection = getComputerChoice();
-    console.log(rockPaperScissorsRound(playerSelection, computerSelection));
-  }
+  let buttons = document.querySelectorAll("button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", choose);
+  });
 }
 
-function isValid(string) {
-  string = string.toLowerCase();
-  if (string === "rock" || string === "paper" || string === "scissors")
-    return true;
-  else return false;
+function choose() {
+  choice = this.className;
+  console.log(choice); // Logs "rock", "paper", or "scissors" based on which button is clicked
 }
 
 // The computer generates its choice of either picking
@@ -102,4 +94,6 @@ function format(string) {
 }
 
 // Runs the game of Rock Paper Scissors.
-game();
+// game();
+
+window.addEventListener("click", game);
