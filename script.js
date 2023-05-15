@@ -1,11 +1,6 @@
-// VERSION 1.0
+// VERSION 2.0
 
 // Runs 5 Rounds of Rock Paper Scissors
-
-// TODO 1) remove logic that plays 5 rounds. ✅
-// TODO 2) add event listener to buttons to rockPaperScissorsRound & playerSelection with console.logs. ✅
-// TODO 3) add a div for displaying results and change all console.logs from 2) to DOM methods.
-// TODO 4) Display the running score and announce the winner once one player reaches 5 points.
 
 function game() {
   let buttons = document.querySelectorAll("button");
@@ -14,9 +9,34 @@ function game() {
   });
 }
 
+// TODO 4.1) First input doesn't work
+// TODO 4.2) abstrace out the choose function
 function choose() {
   choice = this.className;
   console.log(choice); // Logs "rock", "paper", or "scissors" based on which button is clicked
+  let computerChoice = getComputerChoice();
+  console.log(rockPaperScissorsRound(choice, computerChoice));
+  console.log(winHandler.counter);
+  console.log(loseHandler.counter);
+  let playerDisplay = document.getElementsByClassName("playerScore");
+  let computerDisplay = document.querySelector(".computerScore");
+  playerDisplay[0].textContent = `Player Score: ${winHandler.counter}`;
+  computerDisplay.textContent = `Computer Score: ${loseHandler.counter}`;
+  isWinner();
+}
+
+function isWinner() {
+  let screen = document.querySelector(".winnerScreen");
+  if (winHandler.counter == 5) {
+    screen.textContent = "You Win!";
+    winHandler.counter = 0;
+    loseHandler.counter = 0;
+  }
+  if (loseHandler.counter == 5) {
+    screen.textContent = "You Lose...";
+    winHandler.counter = 0;
+    loseHandler.counter = 0;
+  }
 }
 
 // The computer generates its choice of either picking
@@ -79,8 +99,13 @@ function isScissors(play) {
 
 function matchStatement(playerSelection, computerSelection, playerWins) {
   let decisionText;
-  if (playerWins) decisionText = "Win";
-  else decisionText = "Lose";
+  if (playerWins) {
+    decisionText = "Win";
+    winHandler.counter++;
+  } else {
+    decisionText = "Lose";
+    loseHandler.counter++;
+  }
   return `You ${decisionText}! ${format(playerSelection)} beats ${format(
     computerSelection
   )}`;
@@ -93,7 +118,36 @@ function format(string) {
   );
 }
 
+// async function isWinner() {
+//   // const response = await fetch("http://127.0.0.1:5500/");
+//   await delay(100);
+//   if (winHandler.counter == 5) {
+//     alert("YOU WIN");
+//     winHandler.counter = 0;
+//   }
+//   if (loseHandler.counter == 5) {
+//     alert("YOU LOSE");
+//     loseHandler.counter = 0;
+//   }
+// }
+
 // Runs the game of Rock Paper Scissors.
 // game();
 
+var winHandler = (function () {
+  var counter = 0; // this is not in global scope!
+  return function () {
+    counter++;
+  };
+})();
+
+var loseHandler = (function () {
+  var counter = 0; // this is not in global scope!
+  return function () {
+    counter++;
+  };
+})();
+
+winHandler.counter = 0;
+loseHandler.counter = 0;
 window.addEventListener("click", game);
