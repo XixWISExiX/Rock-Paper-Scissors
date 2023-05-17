@@ -1,5 +1,5 @@
 // VERSION 2.0
-
+import { body } from "./DOMref.js";
 // Runs 5 Rounds of Rock Paper Scissors
 
 function game() {
@@ -9,33 +9,38 @@ function game() {
   });
 }
 
-// TODO 4.1) First input doesn't work
-// TODO 4.2) abstrace out the choose function
+// TODO Make a play again button
 function choose() {
-  choice = this.className;
+  let choice = this.className;
   console.log(choice); // Logs "rock", "paper", or "scissors" based on which button is clicked
   let computerChoice = getComputerChoice();
   console.log(rockPaperScissorsRound(choice, computerChoice));
   console.log(winHandler.counter);
   console.log(loseHandler.counter);
-  let playerDisplay = document.getElementsByClassName("playerScore");
-  let computerDisplay = document.querySelector(".computerScore");
-  playerDisplay[0].textContent = `Player Score: ${winHandler.counter}`;
-  computerDisplay.textContent = `Computer Score: ${loseHandler.counter}`;
-  isWinner();
+  findWinner();
 }
 
-function isWinner() {
-  let screen = document.querySelector(".winnerScreen");
+// TODO Display the result of each round to html
+function findWinner() {
+  // let body = document.querySelector("body");
+  let screen = body.querySelector(".winnerScreen");
+  let playerDisplayScore = body.getElementsByClassName("playerScore");
+  let computerDisplayScore = body.getElementsByClassName("computerScore");
+  playerDisplayScore[0].textContent = `Player Score: ${winHandler.counter}`;
+  computerDisplayScore[0].textContent = `Computer Score: ${loseHandler.counter}`;
   if (winHandler.counter == 5) {
     screen.textContent = "You Win!";
-    winHandler.counter = 0;
-    loseHandler.counter = 0;
+    reset();
   }
   if (loseHandler.counter == 5) {
     screen.textContent = "You Lose...";
+    reset();
+  }
+  function reset() {
     winHandler.counter = 0;
     loseHandler.counter = 0;
+    playerDisplayScore[0].textContent = `Player Score: ${winHandler.counter}`;
+    computerDisplayScore[0].textContent = `Computer Score: ${loseHandler.counter}`;
   }
 }
 
@@ -118,22 +123,6 @@ function format(string) {
   );
 }
 
-// async function isWinner() {
-//   // const response = await fetch("http://127.0.0.1:5500/");
-//   await delay(100);
-//   if (winHandler.counter == 5) {
-//     alert("YOU WIN");
-//     winHandler.counter = 0;
-//   }
-//   if (loseHandler.counter == 5) {
-//     alert("YOU LOSE");
-//     loseHandler.counter = 0;
-//   }
-// }
-
-// Runs the game of Rock Paper Scissors.
-// game();
-
 var winHandler = (function () {
   var counter = 0; // this is not in global scope!
   return function () {
@@ -150,4 +139,4 @@ var loseHandler = (function () {
 
 winHandler.counter = 0;
 loseHandler.counter = 0;
-window.addEventListener("click", game);
+document.addEventListener("DOMContentLoaded", game);
