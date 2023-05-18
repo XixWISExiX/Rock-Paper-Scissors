@@ -1,5 +1,5 @@
-// VERSION 2.0
-import { body } from "./DOMref.js";
+// VERSION 3.0
+import { body, roundScreen, screen } from "./DOMref.js";
 // Runs 5 Rounds of Rock Paper Scissors
 
 function game() {
@@ -14,26 +14,25 @@ function choose() {
   let choice = this.className;
   console.log(choice); // Logs "rock", "paper", or "scissors" based on which button is clicked
   let computerChoice = getComputerChoice();
-  console.log(rockPaperScissorsRound(choice, computerChoice));
+  let round = rockPaperScissorsRound(choice, computerChoice);
+  roundScreen[0].textContent = round;
+  console.log(round);
   console.log(winHandler.counter);
   console.log(loseHandler.counter);
   findWinner();
 }
 
-// TODO Display the result of each round to html
 function findWinner() {
-  // let body = document.querySelector("body");
-  let screen = body.querySelector(".winnerScreen");
   let playerDisplayScore = body.getElementsByClassName("playerScore");
   let computerDisplayScore = body.getElementsByClassName("computerScore");
   playerDisplayScore[0].textContent = `Player Score: ${winHandler.counter}`;
   computerDisplayScore[0].textContent = `Computer Score: ${loseHandler.counter}`;
   if (winHandler.counter == 5) {
-    screen.textContent = "You Win!";
+    screen.textContent = "You Won against the computer!";
     reset();
   }
   if (loseHandler.counter == 5) {
-    screen.textContent = "You Lose...";
+    screen.textContent = "You Lost against the computer...";
     reset();
   }
   function reset() {
