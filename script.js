@@ -15,7 +15,6 @@ function choose() {
   console.log(choice); // Logs "rock", "paper", or "scissors" based on which button is clicked
   let computerChoice = getComputerChoice();
   let round = rockPaperScissorsRound(choice, computerChoice);
-  // let roundScreen = body.getElementsByClassName("roundScreen");
   roundScreen[0].textContent = round;
   console.log(round);
   console.log(winHandler.counter);

@@ -2,15 +2,29 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
     <script type="module" src="script.js"></script>
     <title>Rock Paper Scissors!</title>
   </head>
   <body>
-    <div class="playerScore">Player Score: 0</div>
-    <div class="computerScore">Computer Score: 0</div>
-    <button class="rock">Rock</button>
-    <button class="paper">Paper</button>
-    <button class="scissors">Scissors</button>
+    <div class="scoreContainer">
+      <div class="playerScore">Player Score: 0</div>
+      <div class="computerScore">Computer Score: 0</div>
+    </div>
+    <div class="buttonContainer">
+      <div class="rockConatiner">
+        <img src="images/rock.png" alt="rock" />
+        <button class="rock">Rock</button>
+      </div>
+      <div class="paperContainer">
+        <img src="images/paper.png" alt="rock" />
+        <button class="paper">Paper</button>
+      </div>
+      <div class="scissorsContainer">
+        <img src="images/scissors.png" alt="rock" />
+        <button class="scissors">Scissors</button>
+      </div>
+    </div>
     <div class="roundScreen"></div>
     <div class="winnerScreen"></div>
   </body>
