@@ -1,4 +1,4 @@
-// VERSION 2.0
+// VERSION 3.0
 import { body, roundScreen, screen } from "./DOMref.js";
 // Runs 5 Rounds of Rock Paper Scissors
 
